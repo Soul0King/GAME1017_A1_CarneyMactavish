@@ -253,6 +253,8 @@ MonoBehaviour:
   spawnPoint: {fileID: 5432037332113944735}
   splode: {fileID: 3907850022092018160, guid: 8410c0dc8b0216340a696d2c2a5ccd0e, type: 3}
   esp: {fileID: 3475808074023275400}
+  health: {fileID: 1329702025688107080, guid: 788a49c04381566459b3bc49ed520db1, type: 3}
+  ammo: {fileID: 504358220541173763, guid: aba417b74b5d67a4eb5f82f04fe0fb7d, type: 3}
 --- !u!1 &6956419417448748434
 GameObject:
   m_ObjectHideFlags: 0

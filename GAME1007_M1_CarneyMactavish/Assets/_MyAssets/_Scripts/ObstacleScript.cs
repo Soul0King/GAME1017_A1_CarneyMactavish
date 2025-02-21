@@ -25,6 +25,10 @@ public class ObstacleScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.gameObject.name == "CouscousExplosion(Clone)")
+        {
+            Destroy(gameObject);
+        }
 
     }
 

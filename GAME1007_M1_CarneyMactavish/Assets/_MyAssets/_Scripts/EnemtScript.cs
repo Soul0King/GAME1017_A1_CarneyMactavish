@@ -10,13 +10,16 @@ public class EnemtScript : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] GameObject splode;
     [SerializeField] Transform esp;
+    [SerializeField] GameObject health;
+    [SerializeField] GameObject ammo;
+
 
     private PointManager pointManager;
 
 
     private void Start()
     {
-        
+        pointManager = GameObject.Find("PointManager").GetComponent<PointManager>();
         InvokeRepeating("SpawnBullet", 0f, Random.Range(1, 4));
     }
 
@@ -44,10 +47,30 @@ public class EnemtScript : MonoBehaviour
             GameObject explosionInst = Instantiate(splode, esp.position, Quaternion.identity);
             
             Destroy(explosionInst, 0.4f);
+            if (Random.value > 0.9)
+            {
+                GameObject healthPackInst = Instantiate(health, esp.position, Quaternion.identity);
+                
+            }
+            if (Random.value > 0.9)
+            {
+                
+                GameObject couscousAmmoInst = Instantiate(ammo, esp.position, Quaternion.identity);
+            }
+            
+
             Destroy(gameObject);
         }
-        
-        
+
+        if (collision.gameObject.name == "CouscousExplosion(Clone)")
+        {
+            pointManager.UpdateScore(100);
+            Destroy(gameObject);
+            
+        }
+
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

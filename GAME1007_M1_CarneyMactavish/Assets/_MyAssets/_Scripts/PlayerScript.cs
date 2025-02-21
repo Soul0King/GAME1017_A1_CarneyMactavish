@@ -15,6 +15,8 @@ public class PlayerScript : MonoBehaviour
     [SerializeField] GameObject l2;
     [SerializeField] GameObject l3;
     [SerializeField] GameObject l4;
+    [SerializeField] GameObject ccUI;
+    [SerializeField] GameObject ccShot;
 
     [SerializeField] GameObject splode;
     [SerializeField] Transform esp;
@@ -22,10 +24,12 @@ public class PlayerScript : MonoBehaviour
     private PointManager pointManager;
 
     public int lv = 4;
+    public int ccAmmount = 0;
 
     void Start()
     {
-        
+        pointManager = GameObject.Find("PointManager").GetComponent<PointManager>();
+        pointManager.scrv.gameObject.SetActive(true);
     }
 
     void Update()
@@ -37,11 +41,19 @@ public class PlayerScript : MonoBehaviour
         
         transform.Translate(direction * moveSpeed * Time.deltaTime);
         // spawning a projectile
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
-            GameObject bulletInst = Instantiate(bullletPrefab, spawnPoint.position, Quaternion.identity);
-            
-            
+            GameObject bulletInst = Instantiate(bullletPrefab, spawnPoint.position, Quaternion.identity);  
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (ccAmmount == 1)
+            {
+                GameObject couscousShotInst = Instantiate(ccShot, spawnPoint.position, Quaternion.identity);
+                ccAmmount = 0;
+                ccUI.SetActive(false);
+            }
+              
         }
         if (lv == 4)
         {
@@ -101,6 +113,8 @@ public class PlayerScript : MonoBehaviour
                 l4.SetActive(false);
                 GameObject explosionInst = Instantiate(splode, esp.position, Quaternion.identity);
                 Destroy(explosionInst, 3f);
+                pointManager.UpdateHighScore();
+                pointManager.scrv.gameObject.SetActive(false);
                 SceneManager.LoadScene("RestartScreen", LoadSceneMode.Single);
             }
             //Debug.Log("life" + lv);
@@ -117,6 +131,8 @@ public class PlayerScript : MonoBehaviour
                 l4.SetActive(false);
                 GameObject explosionInst = Instantiate(splode, esp.position, Quaternion.identity);
                 Destroy(explosionInst, 3f);
+                pointManager.UpdateHighScore();
+                pointManager.scrv.gameObject.SetActive(false);
                 SceneManager.LoadScene("RestartScreen", LoadSceneMode.Single);
             }
         }
@@ -133,8 +149,25 @@ public class PlayerScript : MonoBehaviour
                 l4.SetActive(false);
                 GameObject explosionInst = Instantiate(splode, esp.position, Quaternion.identity);
                 Destroy(explosionInst, 3f);
+                pointManager.UpdateHighScore();
+                pointManager.scrv.gameObject.SetActive(false);
                 SceneManager.LoadScene("RestartScreen", LoadSceneMode.Single);
             }
+        }
+
+        if (collision.gameObject.name == "HealthPack(Clone)")
+        {
+            lv += 1;
+            if (lv > 4)
+            {
+                lv = 4;
+            }
+        }
+        
+        if (collision.gameObject.name == "CouscousAmmo(Clone)")
+        {
+            ccUI.SetActive(true);
+            ccAmmount = 1;
         }
 
 
