@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
 
-    [SerializeField] GameObject bButton;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,14 +19,5 @@ public class UIManager : MonoBehaviour
         
     }
 
-    public void PauseGame()
-    {
-        Time.timeScale = 0f;
-        bButton.SetActive(true);
-    }
-    public void ResumeGame()
-    {
-        Time.timeScale = 1f;
-        bButton.SetActive(false);
-    }
+    
 }
