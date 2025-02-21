@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] GameObject bButton;
     [SerializeField] GameObject mainController;
+    [SerializeField] GameObject pointManager;
 
     
 
@@ -43,6 +44,7 @@ public class SoundManager : MonoBehaviour
     public void ChangeVolume()
     {
         mainController.GetComponent<AudioSource>().volume = volumeSlider.value;
+        pointManager.GetComponent<AudioSource>().volume = volumeSlider.value / 4f;
         //AudioListener.volume = volumeSlider.value;
         Save();
     }
