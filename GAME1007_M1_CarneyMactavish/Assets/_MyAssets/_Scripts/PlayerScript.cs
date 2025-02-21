@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour
         
         transform.Translate(direction * moveSpeed * Time.deltaTime);
         // spawning a projectile
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject bulletInst = Instantiate(bullletPrefab, spawnPoint.position, Quaternion.identity);  
         }
